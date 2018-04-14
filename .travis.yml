@@ -2,8 +2,17 @@ language: python
 os: linux
 python: 3.6
 
+env:
+  global:
+    # Doctr deploy key for kb-press/kb-press.github.io
+    - secure: "e34aHq8IEdRwCp27TWai+0CDdEfA7vnjNKIr2eaBrda9Zh8w2/edU2a9GYMJ7LCVJA0FuMTE7S17IHqh9ZAsMqzNFrMVpku2vOH/UhMnyBj6NIggm/bW7TeJ4ry0osxcmXAQVgxHyeTS3tFRnkv2mkEi0DYEd84diryZthADyJGADix0lRfzhS8CYF3p17QcKnovlDjatumf1GAv4uBfRx1DTdjvHwz9ZUzFhTRLvkafOW2LjLq63bMMD84pL9IY+71YbYJ92nlSui2vfyiTX60SYD46fuTHoUlw4oNe1jBU3xNC+kGUHUBzs4Lukw+40KrvhZO83IONwwWgsCGtPcaRmLLe/U27M4R+pFj8r/5jbv/GE21krEt3D2UhCoWazd3GeuHnYr3eDkahukEquDyXxZNVP6mnH6zs2KFjNn8wTBohYn7ze+uRl8zM06VbaEMfB0hnlqlGpRLLT9Ecew9IGyOlQH9sdCD0wQ2RHt9k3gVnw1TvP4IQNZUYuqOc4l646ofOhQUf3L+B4xnrGrJZzudS2nigwUz1kfk40vZja1qL9bn3uDg/rL7vlCgsuWIR9f6uqYlDhDKCPNfRcynJ31jO9cs6u6bKVJs3GvkILyuZM7rOp06sFJz25YXh+zs/L3kOpclHk1t67pIYraC5H620JZ4ajAjc7Ky+SwA="
+
+
 install:
   - pip install -r requirements.txt
 
 script:
+  - set -e
   - bash bin/build.sh
+  - pip install doctr
+  - doctr deploy --built-docs _build/ --deploy-repo kb-press/kb-press.github.io .
