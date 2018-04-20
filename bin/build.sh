@@ -9,7 +9,7 @@ fi
 
 for f in $nbdir/*.ipynb; do
     # execute notebook and export to HTML
-    jupyter nbconvert "$f" --execute --to html --output-dir $builddir
+    jupyter nbconvert "$f" --template=templates/nbextensions --execute --to html --output-dir $builddir
 done
 
 for f in $builddir/*.html; do
