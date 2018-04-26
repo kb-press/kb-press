@@ -13,6 +13,6 @@ install:
 
 script:
   - set -e
-  - bash bin/build.sh
+  - python bin/build.py
   - pip install doctr
   - doctr deploy --built-docs _build/ --deploy-repo kb-press/kb-press.github.io .

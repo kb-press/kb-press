@@ -1,19 +1,14 @@
-{#
-Template from jupyter_contrib_nbextensions for the ability to hide input cells.
-https://github.com/ipython-contrib/jupyter_contrib_nbextensions
-#}
-
 {%- extends 'full.tpl' -%}
 
 {% block input_group -%}
-{%- if cell.metadata.hide_input or nb.metadata.hide_input -%}
+{%- if cell.source.startswith('#output_only\n') or cell.source.startswith('#hidden\n') or nb.metadata.hide_input -%}
 {%- else -%}
 {{ super() }}
 {%- endif -%}
 {% endblock input_group %}
 
 {% block output_group -%}
-{%- if cell.metadata.hide_output -%}
+{%- if cell.source.startswith('#input_only\n') or cell.source.startswith('#hidden\n') -%}
 {%- else -%}
     {{ super() }}
 {%- endif -%}
